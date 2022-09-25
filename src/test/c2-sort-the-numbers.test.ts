@@ -1,4 +1,4 @@
-import solution from '../challenges/c2-sort-the-numbers/solution';
+import solution from '../challenges/c2-sort-the-numbers/solution.js';
 
 describe('sort the numbers solution', () => {
   test('three numbers', () => {

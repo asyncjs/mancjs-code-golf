@@ -1,10 +1,13 @@
-import path = require('path');
-import express = require('express');
-import bodyParser = require('body-parser');
-const mustachex = require('mustachex');
+import path from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
+import mustachex from 'mustachex';
+import * as url from 'url';
 
-import play from './routes/play';
-import admin from './routes/admin';
+import play from './routes/play.js';
+import admin from './routes/admin.js';
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const PORT = 1122;
 

@@ -1,8 +1,12 @@
-import child_process = require('child_process');
+import child_process from 'child_process';
+import * as path from 'path';
+import * as url from 'url';
 
-import { getChallenge } from './challenge-library';
-import type { VerifyJob } from './verifier';
-import * as game from './game';
+import type { VerifyJob } from './verifier.js';
+import * as game from './game.js';
+import { challenges } from '../challenges/index.js';
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const MAX_RUNTIME = 10000;
 
@@ -11,18 +15,16 @@ export const verify = (
   callback: (res: { valid: false; err: string }) => void
 ) => {
   const currentGame = game.getOrError();
-  const verifier = child_process.fork(__dirname + '/verifier');
-  const challenge = getChallenge(currentGame.key);
+  const verifier = child_process.fork(path.resolve(__dirname, 'verifier.ts'));
+  const challenge = challenges.find((ch) => ch.key === currentGame.key);
 
   if (!challenge) {
     throw new Error('Challenge not found');
   }
 
-  const job: VerifyJob = {
+  const job: VerifyJob<any, any> = {
     file,
-    input: challenge.input,
-    output: challenge.output,
-    rules: challenge.rules || [],
+    challenge,
   };
 
   verifier.send(job);

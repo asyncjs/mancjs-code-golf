@@ -1,11 +1,11 @@
-import fs = require('fs');
-import lodash = require('lodash');
-import express = require('express');
-import multiparty = require('multiparty');
+import fs from 'fs';
+import lodash from 'lodash';
+import express from 'express';
+import multiparty from 'multiparty';
 
-import * as game from '../game/game';
-import { verify } from '../game/game-verifier';
-import { challenges } from '../challenges/types';
+import * as game from '../game/game.js';
+import { verify } from '../game/game-verifier.js';
+import { challenges } from '../challenges/index.js';
 
 const app = express();
 
@@ -22,7 +22,9 @@ app.get('/', (req, res) => {
     key: req.query.key,
   };
 
-  const challenge = challenges[currentGame.key];
+  const challenge = challenges.find(
+    (challenge) => challenge.key === currentGame.key
+  );
   const timeRemaining = game.getTimeRemainingSeconds();
 
   let clock = '';

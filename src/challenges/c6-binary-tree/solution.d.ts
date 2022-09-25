@@ -6,4 +6,4 @@ declare interface Node {
   c?: any; // Evilness
 }
 
-export = play;
+export default play;

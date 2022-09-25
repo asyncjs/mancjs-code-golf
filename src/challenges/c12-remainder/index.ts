@@ -1,14 +1,30 @@
-import type { Challenge } from '../types';
-import solution from './solution';
+import type { Challenge } from '../types.js';
 
-const input = [7362, 392];
-
-const challenge: Challenge = {
-  input,
+const challenge: Challenge<[input: [number, number]], number> = {
   title: 'Remainder',
-  output: solution(input),
   description: `Write a function that takes an array of two numbers – the first the dividend, the second the divisor – and returns the remainder.`,
-  example: `[10, 2] ⟶ 0, [25, 4] ⟶ 1, [12, 7] ⟶ 5`,
+  example: {
+    input: [[10, 2]],
+    output: 0,
+  },
+  assertions: [
+    {
+      input: [[10, 2]],
+      output: 0,
+    },
+    {
+      input: [[25, 4]],
+      output: 1,
+    },
+    {
+      input: [[12, 7]],
+      output: 5,
+    },
+    {
+      input: [[7362, 392]],
+      output: 306,
+    },
+  ],
 };
 
-export = challenge;
+export default challenge;

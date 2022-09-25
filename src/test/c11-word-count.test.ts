@@ -1,4 +1,4 @@
-import solution from '../challenges/c11-word-count/solution';
+import solution from '../challenges/c11-word-count/solution.js';
 
 describe('word count solution', () => {
   test('counts single word', () => {

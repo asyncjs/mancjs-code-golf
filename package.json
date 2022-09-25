@@ -2,8 +2,9 @@
   "name": "mancjs-golf",
   "version": "0.0.1",
   "description": "A code golf game server for JavaScript",
+  "type": "module",
   "scripts": {
-    "start": "CG_ADMIN_PASSWORD=admin ts-node src",
+    "start": "CG_ADMIN_PASSWORD=admin ts-node --esm --files --project tsconfig.json src/index.ts",
     "tests": "jest --runInBand",
     "tests-watch": "jest --watch",
     "format": "prettier --write '**/*'",

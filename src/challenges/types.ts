@@ -30,4 +30,5 @@ export interface Challenge<
   assertions: readonly Assertion<A, R>[];
   assertRules?: (playString: string) => void;
   context?: Record<string, any>;
+  timeLimitMinutes?: number;
 }

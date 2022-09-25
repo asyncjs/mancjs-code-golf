@@ -1,10 +1,13 @@
-import fs = require('fs');
-import path = require('path');
-import crypto = require('crypto');
-import lodash = require('lodash');
-const { jsmin } = require('jsmin');
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import lodash from 'lodash';
+import { jsmin } from 'jsmin';
+import * as url from 'url';
 
-import { challenges } from '../challenges/types';
+import { challenges } from '../challenges/index.js';
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const DEFAULT_TIME_LIMIT = 20;
 
@@ -29,7 +32,7 @@ interface AddEntryRequest {
 
 export interface Entry extends AddEntryRequest {
   gravatar: string;
-  strokes: number;
+  strokes: number | undefined;
   updated: Date;
   valid: boolean;
 }
@@ -99,7 +102,7 @@ export const get = () => {
 };
 
 export const getCurrentChallenge = () => {
-  return game ? challenges[game.key] : null;
+  return challenges.find((challenge) => challenge.key === game?.key);
 };
 
 export const getOrError = () => {
@@ -136,6 +139,7 @@ export const addEntry = (
         /^\n+/,
         ''
       );
+
       return contents.length;
     }
   };

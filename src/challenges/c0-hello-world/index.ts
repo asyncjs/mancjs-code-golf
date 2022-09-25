@@ -1,12 +1,18 @@
-import type { Challenge } from '../types';
-import solution from './solution';
+import type { Challenge } from '../types.js';
 
-const challenge: Challenge = {
-  input: '',
+const challenge: Challenge<[], string> = {
   title: 'Hello World',
-  output: solution(),
   description: `Write a function that returns "Hello, World!".`,
-  example: `⟶ "Hello, World!"`,
+  example: {
+    input: [],
+    output: 'Hello, World!',
+  },
+  assertions: [
+    {
+      input: [],
+      output: 'Hello, World!',
+    },
+  ],
 };
 
-export = challenge;
+export default challenge;

@@ -1,14 +1,28 @@
-import { Challenge } from '../types';
-import solution from './solution';
+import type { Challenge } from '../types.js';
 
-const input = 743243892;
-
-const challenge: Challenge = {
-  input,
+const challenge: Challenge<[input: number], string> = {
   title: 'Number To Words',
-  output: solution(input),
   description: `Write a function that takes a number and converts it to words.`,
-  example: `2 ⟶ "two", 301 ⟶ "three hundred one", 12341 ⟶ "twelve thousand three hundred forty one", 1290489 ⟶ "one million two hundred ninety thousand four hundred eighty nine"`,
+  example: {
+    input: [12341],
+    output: 'twelve thousand three hundred forty one',
+  },
+  assertions: [
+    {
+      input: [12341],
+      output: 'twelve thousand three hundred forty one',
+    },
+    {
+      input: [1290489],
+      output:
+        'one million two hundred ninety thousand four hundred eighty nine',
+    },
+    {
+      input: [743243892],
+      output:
+        'seven hundred forty three million two hundred forty three thousand eight hundred ninety two',
+    },
+  ],
 };
 
-export = challenge;
+export default challenge;

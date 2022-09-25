@@ -1,4 +1,4 @@
-import solution from '../challenges/c4-roman-numerals/solution';
+import solution from '../challenges/c4-roman-numerals/solution.js';
 
 describe('roman numerals solution', () => {
   test('converts correctly', () => {

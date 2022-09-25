@@ -1,3 +1,3 @@
 declare function play(n: number[]): number;
 
-export = play;
+export default play;
