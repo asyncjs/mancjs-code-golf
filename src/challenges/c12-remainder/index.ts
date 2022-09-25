@@ -1,4 +1,4 @@
-import type { Challenge } from '..';
+import type { Challenge } from '../types';
 import solution from './solution';
 
 const input = [7362, 392];

@@ -1,7 +1,7 @@
 import lodash from 'lodash';
 import { readFileSync } from 'fs';
 import { runInNewContext } from 'vm';
-import { Primative, Rule } from '../challenges';
+import { Primative, Rule } from '../challenges/types';
 
 export interface VerifyJob {
   file: string;

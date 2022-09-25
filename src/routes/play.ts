@@ -5,7 +5,7 @@ import multiparty = require('multiparty');
 
 import * as game from '../game/game';
 import { verify } from '../game/game-verifier';
-import { challenges } from '../challenges';
+import { challenges } from '../challenges/types';
 
 const app = express();
 

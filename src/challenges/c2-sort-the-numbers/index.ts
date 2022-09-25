@@ -1,4 +1,4 @@
-import { Challenge } from '..';
+import { Challenge } from '../types';
 import solution from './solution';
 
 const input = [10, 1, 150, 34, 300, 250, 12, 22, 23, 65, 33, 16, 1, 2];

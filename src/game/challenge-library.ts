@@ -1,4 +1,4 @@
-import { challenges } from '../challenges';
+import { challenges } from '../challenges/types';
 
 export const getChallenges = () => {
   const keys = Object.keys(challenges);

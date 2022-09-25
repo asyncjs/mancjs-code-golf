@@ -4,7 +4,7 @@ import crypto = require('crypto');
 import lodash = require('lodash');
 const { jsmin } = require('jsmin');
 
-import { challenges } from '../challenges';
+import { challenges } from '../challenges/types';
 
 const DEFAULT_TIME_LIMIT = 20;
 
