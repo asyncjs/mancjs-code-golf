@@ -31,7 +31,10 @@ process.on('message', (entry: VerifyJob<any, any>) => {
       },
     };
 
-    runInNewContext(script, context);
+    const toRun = "'use strict'\n"+script+"\ntry{if (!module.exports.play) {module.exports.play = play}} catch(e) {}";
+    console.log(toRun)
+    runInNewContext(toRun, context);
+    console.log(context)
 
     const play =
       typeof context.module.exports === 'function'

@@ -35,14 +35,12 @@ Node `v16.12.0` with no context and strict mode enforced.
 
 #### Submissions
 
-Players must write a script containing their solution. The solution must be a single synchronous function exported as the value of `module.exports`. The exported function will be called by the game server on each submission. Example:
+Players must write a script containing their solution. The solution must be a single synchronous function named `play`. The exported function will be called by the game server on each submission. Example:
 
 ```js
-const play = (input) => {
+let play = (input) => {
   return 'your answer';
 };
-
-module.exports = play;
 ```
 
 Players can submit updated solutions as often as they like on the submission page.
