@@ -49,8 +49,8 @@ Players can submit updated solutions as often as they like on the submission pag
 
 #### Rules
 
-- Your solution must be a single synchronous function assigned to `module.exports`
-- Your code must run in strict mode – use node's `--use_strict` flag to test your script
+- Your solution must be a single synchronous function named `play` (don't worry about exporting it)
+- Your code will be run in strict mode – use node's `--use_strict` flag to test your script
 - All JavaScript language features available in Node.js `v16.12.0` are available, with game-specific exceptions
 - Scripts are timed-out and fail after 5 seconds of execution time
 - Comments, line breaks and whitespace **do not count** towards your score
