@@ -4,10 +4,10 @@ A [code golf](https://en.wikipedia.org/wiki/Code_golf) game server for JavaScrip
 
 ## Running
 
-+ Clone the repo
-+ Install dependencies via `npm install`
-+ Set the `CG_ADMIN` environment variable to secure access the the `/admin` page
-+ Start the server locally via `npm start`
+- Clone the repo
+- Install dependencies via `npm install`
+- Set the `CG_ADMIN_PASSWORD` environment variable to secure access the the `/admin` page (see package.json `start` script)
+- Start the server locally via `npm start`
 
 ## URLs
 
@@ -21,7 +21,7 @@ The admin page for creating new games. Stopped games prevent new submissions and
 
 #### Security
 
-The admin page is protected with HTTP basic auth. The username is `admin` and the password is the value of the `CG_ADMIN` environment variable.
+The admin page is protected with HTTP basic auth. The username is `admin` and the password is the value of the `CG_ADMIN_PASSWORD` environment variable.
 
 ## Notes
 
@@ -39,7 +39,7 @@ Players must write a script containing their solution. The solution must be a si
 
 ```js
 const play = (input) => {
-  return "your answer";
+  return 'your answer';
 };
 
 module.exports = play;
