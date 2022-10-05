@@ -1,5 +1,4 @@
-import { Challenge } from '..';
-import solution from './solution';
+import type { Challenge } from '../types.js';
 
 interface Node {
   a?: Node;
@@ -80,13 +79,32 @@ const input: Node = {
   },
 };
 
-const challenge: Challenge = {
-  input,
+const challenge: Challenge<[node: Node], number> = {
   title: 'Binary Tree',
-  output: solution(input),
   description:
     "Write a function to count the total number of nodes in a binary tree. The tree will be a JavaScript object, which denotes child nodes via 'a' and 'b' fields.",
-  example: `{} ⟶ 1, { a: {} } ⟶ 2, { a: {}, b: { a: {}, b: {} } } ⟶ 5`,
+  example: {
+    input: [{ a: {}, b: { a: {}, b: {} } }],
+    output: 5,
+  },
+  assertions: [
+    {
+      input: [{}],
+      output: 1,
+    },
+    {
+      input: [{ a: {} }],
+      output: 2,
+    },
+    {
+      input: [{ a: {}, b: { a: {}, b: {} } }],
+      output: 5,
+    },
+    {
+      input: [input],
+      output: 93,
+    },
+  ],
 };
 
-export = challenge;
+export default challenge;

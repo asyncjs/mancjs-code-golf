@@ -1,4 +1,4 @@
-import solution from '../challenges/c10-array-flatten/solution';
+import solution from '../challenges/c10-array-flatten/solution.js';
 
 describe('array flatten rearrange solution', () => {
   test('flattens and rearranges single values', () => {

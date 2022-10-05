@@ -1,4 +1,4 @@
-import solution from '../challenges/c12-remainder/solution';
+import solution from '../challenges/c12-remainder/solution.js';
 
 describe('remainder solution', () => {
   test('computes correct remainders', () => {

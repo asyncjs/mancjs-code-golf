@@ -1,8 +1,8 @@
-import express = require('express');
-import expressBasicAuth = require('express-basic-auth');
+import express from 'express';
+import expressBasicAuth from 'express-basic-auth';
 
-import * as game from '../game/game';
-import * as challengeLibrary from '../game/challenge-library';
+import { challenges } from '../challenges/index.js';
+import * as game from '../game/game.js';
 
 const DEFAULT_TIME_LIMIT = 20;
 
@@ -18,7 +18,7 @@ app.get('/admin', (_req, res) => {
   return res.render('admin', {
     gameData: JSON.stringify(game.get(), undefined, 2),
     challenge: game.getCurrentChallenge(),
-    challengeList: challengeLibrary.getChallenges(),
+    challengeList: challenges,
     timeLimitMinutes:
       game.getTimeRemainingSeconds() > 0 ? '' : DEFAULT_TIME_LIMIT,
     game: game.get(),
@@ -45,8 +45,8 @@ app.get('/stop', (_req, res) => {
 
 app.get('/challenge', (req, res) => {
   const key = req.query.key?.toString();
-  const challenge = key && challengeLibrary.getChallenge(key);
-  return challenge ? res.json({ ...challenge, key }) : res.status(404).end();
+  const challenge = key && challenges.find((ch) => ch.key === key);
+  return challenge ? res.json(challenge) : res.status(404).end();
 });
 
 export default app;

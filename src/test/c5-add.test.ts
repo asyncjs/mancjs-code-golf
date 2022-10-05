@@ -1,4 +1,4 @@
-import solution from '../challenges/c5-add/solution';
+import solution from '../challenges/c5-add/solution.js';
 
 describe('add solution', () => {
   test('adds correctly', () => {

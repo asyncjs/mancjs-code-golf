@@ -1,14 +1,26 @@
-import { Challenge } from '..';
-import solution from './solution';
+import type { Challenge } from '../types.js';
 
-const input = 2476;
-
-const challenge: Challenge = {
-  input,
+const challenge: Challenge<[input: number], string> = {
   title: 'Roman Numerals',
-  output: solution(input),
   description: `Write a function that converts numbers to roman numerals.`,
-  example: `23 ⟶ "XXIII", 2743 ⟶ "MMDCCXLIII"`,
+  example: {
+    input: [23],
+    output: 'XXIII',
+  },
+  assertions: [
+    {
+      input: [23],
+      output: 'XXIII',
+    },
+    {
+      input: [2743],
+      output: 'MMDCCXLIII',
+    },
+    {
+      input: [2476],
+      output: 'MMCDLXXVI',
+    },
+  ],
 };
 
-export = challenge;
+export default challenge;

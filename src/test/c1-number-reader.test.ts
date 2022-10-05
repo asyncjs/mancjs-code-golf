@@ -1,4 +1,4 @@
-import solution from '../challenges/c1-number-reader/solution';
+import solution from '../challenges/c1-number-reader/solution.js';
 
 describe('number reader solution', () => {
   test('one digit', () => {

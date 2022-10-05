@@ -1,4 +1,4 @@
-import solution from '../challenges/c9-object-merge/solution';
+import solution from '../challenges/c9-object-merge/solution.js';
 
 describe('simple object merge solution', () => {
   const s1 = { x: 1 };

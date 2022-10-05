@@ -1,4 +1,4 @@
-import solution from '../challenges/c3-number-to-words/solution';
+import solution from '../challenges/c3-number-to-words/solution.js';
 
 describe('number to words solution', () => {
   test('one digit', () => {

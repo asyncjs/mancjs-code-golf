@@ -1,14 +1,18 @@
-import type { Challenge } from '..';
-import solution from './solution';
+import type { Challenge } from '../types.js';
 
-const input = 877209536;
-
-const challenge: Challenge = {
-  input,
+const challenge: Challenge<[input: number], string> = {
   title: 'Number Reader',
-  output: solution(input),
   description: `Write a function that takes a number and converts it to the equivalant string.`,
-  example: `12341 ⟶ "one two three four one"`,
+  example: {
+    input: [12341],
+    output: 'one two three four one',
+  },
+  assertions: [
+    {
+      input: [877209536],
+      output: 'eight seven seven two zero nine five three six',
+    },
+  ],
 };
 
-export = challenge;
+export default challenge;

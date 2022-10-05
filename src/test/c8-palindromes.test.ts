@@ -1,4 +1,4 @@
-import solution from '../challenges/c8-palindromes/solution';
+import solution from '../challenges/c8-palindromes/solution.js';
 
 describe('palindromes solution', () => {
   test('detects none', () => {

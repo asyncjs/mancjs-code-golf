@@ -1,4 +1,4 @@
-import solution from '../challenges/c6-binary-tree/solution';
+import solution from '../challenges/c6-binary-tree/solution.js';
 
 describe('binary tree solution', () => {
   test('counts nodes properly', () => {

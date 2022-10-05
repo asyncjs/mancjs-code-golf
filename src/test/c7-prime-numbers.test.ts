@@ -1,4 +1,4 @@
-import solution from '../challenges/c7-prime-numbers/solution';
+import solution from '../challenges/c7-prime-numbers/solution.js';
 
 describe('prime numbers solution', () => {
   test('primes < 5', () => {
