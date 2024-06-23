@@ -2,7 +2,7 @@ import lodash from 'lodash';
 import { readFileSync } from 'fs';
 import { runInNewContext } from 'vm';
 
-import { formatTypeAndValue } from './utils.js';
+import { formatTypeAndValue, formatValue } from './utils.js';
 import { challenges } from '../challenges/index.js';
 import { Primitive } from '../challenges/types.js';
 
@@ -77,7 +77,7 @@ process.on('message', (entry: VerifyJob) => {
             )} but received ${formatTypeAndValue(
               result,
               true
-            )} when supplied with ${formatTypeAndValue(assertion.input, false)}`
+            )} when supplied with arguments: ${assertion.input.map((input) => formatValue(input)).join(', ')}`
           );
         }
       });

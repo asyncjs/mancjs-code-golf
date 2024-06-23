@@ -36,7 +36,7 @@ export const formatValue = (value: unknown): string => {
 
 export const formatTypeAndValue = (
   value: Primitive | readonly unknown[] | Record<string, unknown>,
-  actual: Primitive
+  isResult: Primitive
 ) => {
   if (value === null) {
     return 'null';
@@ -47,12 +47,12 @@ export const formatTypeAndValue = (
   }
 
   if (typeof value === 'function') {
-    return `${actual ? 'different ' : ''}function`;
+    return `${isResult ? 'different ' : ''}function`;
   }
 
   if (Array.isArray(value)) {
-    return `${actual ? 'different ' : ''}array (${JSON.stringify(value)})`;
+    return `array ${formatValue(value)}`;
   }
 
-  return `${actual ? 'different ' : ''}${typeof value} (${JSON.stringify(value)})`;
+  return `${typeof value} ${formatValue(value)}`;
 };
