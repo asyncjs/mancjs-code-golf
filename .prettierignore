@@ -13,5 +13,6 @@ jquery.*
 
 /public/fonts/
 /public/img/
+/views/
 
 /data/
