@@ -2,19 +2,13 @@ import lodash from 'lodash';
 import { readFileSync } from 'fs';
 import { runInNewContext } from 'vm';
 
-import type { Challenge, Primitive } from '../challenges/types.js';
 import { formatTypeAndValue } from './utils.js';
+import { challenges } from '../challenges/index.js';
+import { Primitive } from '../challenges/types.js';
 
-export interface VerifyJob<
-  A extends readonly Primitive[],
-  R extends Primitive,
-> {
+export interface VerifyJob {
   file: string;
-  challenge: Omit<Challenge<A, R>, 'example'> & {
-    key: string;
-    solution: string;
-    example: string;
-  };
+  key: string;
 }
 
 const hasKey = <K extends string>(
@@ -22,8 +16,14 @@ const hasKey = <K extends string>(
   key: K
 ): obj is { [P in K]: unknown } => key in obj;
 
-process.on('message', (entry: VerifyJob<readonly Primitive[], Primitive>) => {
+process.on('message', (entry: VerifyJob) => {
   try {
+    const challenge = challenges.find((ch) => ch.key === entry.key);
+
+    if (!challenge) {
+      throw new Error('Challenge not found');
+    }
+
     const script = readFileSync(entry.file, 'utf8');
     const context: { play?: unknown; module: { exports: unknown } } = {
       module: {
@@ -56,7 +56,9 @@ process.on('message', (entry: VerifyJob<readonly Primitive[], Primitive>) => {
     }
 
     try {
-      entry.challenge.assertions.forEach((assertion) => {
+      challenge.assertRules?.(script);
+
+      challenge.assertions.forEach((assertion) => {
         const result = play(...assertion.input);
 
         const expected =
@@ -79,8 +81,6 @@ process.on('message', (entry: VerifyJob<readonly Primitive[], Primitive>) => {
           );
         }
       });
-
-      entry.challenge.assertRules?.(entry.challenge.solution);
     } catch (err) {
       return process.send?.({
         err:
@@ -99,7 +99,7 @@ process.on('message', (entry: VerifyJob<readonly Primitive[], Primitive>) => {
     console.error('Verifier failed with error:', err);
 
     process.send?.({
-      err: 'Your script contains an error',
+      err: `Your script contains an error: ${err}`,
       valid: false,
     });
   }
