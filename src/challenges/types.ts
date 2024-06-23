@@ -14,7 +14,7 @@ export interface Example<A extends readonly Primitive[], R extends Primitive> {
 
 export interface Assertion<
   A extends readonly Primitive[],
-  R extends Primitive
+  R extends Primitive,
 > {
   input: A;
   output: R | ((play: (...args: A) => R, input: A) => R);
@@ -22,7 +22,7 @@ export interface Assertion<
 
 export interface Challenge<
   A extends readonly Primitive[],
-  R extends Primitive
+  R extends Primitive,
 > {
   title: string;
   description: string;

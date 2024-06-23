@@ -7,7 +7,7 @@ import { formatTypeAndValue } from './utils.js';
 
 export interface VerifyJob<
   A extends readonly Primitive[],
-  R extends Primitive
+  R extends Primitive,
 > {
   file: string;
   challenge: Omit<Challenge<A, R>, 'example'> & {
@@ -31,20 +31,23 @@ process.on('message', (entry: VerifyJob<any, any>) => {
       },
     };
 
-    const toRun = "'use strict'\n"+script+"\ntry{if (!module.exports.play) {module.exports.play = play}} catch(e) {}";
-    console.log(toRun)
+    const toRun =
+      "'use strict'\n" +
+      script +
+      '\ntry{if (!module.exports.play) {module.exports.play = play}} catch(e) {}';
+    console.log(toRun);
     runInNewContext(toRun, context);
-    console.log(context)
+    console.log(context);
 
     const play =
       typeof context.module.exports === 'function'
         ? context.module.exports
         : typeof context.module.exports === 'object' &&
-          !!context.module.exports &&
-          hasKey(context.module.exports, 'play') &&
-          typeof context.module.exports.play === 'function'
-        ? context.module.exports.play
-        : context.play;
+            !!context.module.exports &&
+            hasKey(context.module.exports, 'play') &&
+            typeof context.module.exports.play === 'function'
+          ? context.module.exports.play
+          : context.play;
 
     if (typeof play !== 'function') {
       return process.send?.({
@@ -85,8 +88,8 @@ process.on('message', (entry: VerifyJob<any, any>) => {
           typeof err === 'string'
             ? err
             : err instanceof Error
-            ? err.message
-            : 'Unknown error',
+              ? err.message
+              : 'Unknown error',
         valid: false,
       });
     }
