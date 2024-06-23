@@ -22,21 +22,25 @@ export const getChallenges = async (challengeDir: string) => {
       }
 
       if (!fs.existsSync(solutionPath)) {
+        // eslint-disable-next-line no-console
         console.error(`No solution at ${solutionPath}`);
         return null;
       }
 
       if (!fs.lstatSync(solutionPath).isFile()) {
+        // eslint-disable-next-line no-console
         console.error(`Solution was not a file at ${solutionPath}`);
         return null;
       }
 
       if (!fs.existsSync(detailsPath)) {
+        // eslint-disable-next-line no-console
         console.log(`No challenge details at ${detailsPath}`);
         return null;
       }
 
       if (!fs.lstatSync(detailsPath).isFile()) {
+        // eslint-disable-next-line no-console
         console.log(`Challenge details was not a file at ${detailsPath}`);
         return null;
       }

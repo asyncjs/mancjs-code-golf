@@ -29,6 +29,6 @@ export interface Challenge<
   example: Example<A, R>;
   assertions: readonly Assertion<A, R>[];
   assertRules?: (playString: string) => void;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
   timeLimitMinutes?: number;
 }

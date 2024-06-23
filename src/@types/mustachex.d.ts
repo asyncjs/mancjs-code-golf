@@ -2,6 +2,6 @@ declare module 'mustachex' {
   export const express: (
     path: string,
     options: object,
-    callback: (e: any, rendered?: string) => void
+    callback: (e: unknown, rendered?: string) => void
   ) => void;
 }

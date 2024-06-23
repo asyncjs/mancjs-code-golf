@@ -1,3 +1,5 @@
+import { Primitive } from '../challenges/types.js';
+
 export const formatValue = (value: unknown): string => {
   if (typeof value === 'undefined') {
     return 'undefined';
@@ -32,7 +34,7 @@ export const formatValue = (value: unknown): string => {
   return `Unknown value: ${value}`;
 };
 
-export const formatTypeAndValue = (value: unknown, actual: any) => {
+export const formatTypeAndValue = (value: unknown, actual: Primitive) => {
   if (value === null) {
     return 'null';
   }

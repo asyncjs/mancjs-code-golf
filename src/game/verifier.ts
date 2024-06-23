@@ -22,7 +22,7 @@ const hasKey = <K extends string>(
   key: K
 ): obj is { [P in K]: unknown } => key in obj;
 
-process.on('message', (entry: VerifyJob<any, any>) => {
+process.on('message', (entry: VerifyJob<readonly Primitive[], Primitive>) => {
   try {
     const script = readFileSync(entry.file, 'utf8');
     const context: { play?: unknown; module: { exports: unknown } } = {
@@ -35,9 +35,8 @@ process.on('message', (entry: VerifyJob<any, any>) => {
       "'use strict'\n" +
       script +
       '\ntry{if (!module.exports.play) {module.exports.play = play}} catch(e) {}';
-    console.log(toRun);
+
     runInNewContext(toRun, context);
-    console.log(context);
 
     const play =
       typeof context.module.exports === 'function'
@@ -63,7 +62,7 @@ process.on('message', (entry: VerifyJob<any, any>) => {
         const expected =
           typeof assertion.output === 'function'
             ? assertion.output(
-                play as (...args: readonly any[]) => any,
+                play as (...args: readonly Primitive[]) => Primitive,
                 assertion.input
               )
             : assertion.output;
@@ -96,7 +95,8 @@ process.on('message', (entry: VerifyJob<any, any>) => {
 
     process.send?.({ valid: true });
   } catch (err) {
-    console.error('verifier failed with error:', err);
+    // eslint-disable-next-line no-console
+    console.error('Verifier failed with error:', err);
 
     process.send?.({
       err: 'Your script contains an error',
