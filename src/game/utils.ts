@@ -42,10 +42,6 @@ export const formatTypeAndValue = (
     return 'null';
   }
 
-  if (typeof value === 'undefined') {
-    return 'undefined';
-  }
-
   if (typeof value === 'function') {
     return `${isResult ? 'different ' : ''}function`;
   }
