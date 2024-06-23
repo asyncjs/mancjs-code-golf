@@ -23,7 +23,7 @@ const challenge: Challenge<[input: [number, number]], number> = {
     },
   ],
   context: {
-    eval: () => 42,
+    eval: () => "eval is not the answer you're looking for",
   },
   assertRules: (playString) => {
     if (playString.includes('+')) {
