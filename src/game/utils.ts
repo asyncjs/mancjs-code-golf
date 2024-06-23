@@ -34,7 +34,10 @@ export const formatValue = (value: unknown): string => {
   return `Unknown value: ${value}`;
 };
 
-export const formatTypeAndValue = (value: unknown, actual: Primitive) => {
+export const formatTypeAndValue = (
+  value: Primitive | readonly unknown[] | Record<string, unknown>,
+  actual: Primitive
+) => {
   if (value === null) {
     return 'null';
   }
@@ -44,23 +47,12 @@ export const formatTypeAndValue = (value: unknown, actual: Primitive) => {
   }
 
   if (typeof value === 'function') {
-    return 'function';
+    return `${actual ? 'different ' : ''}function`;
   }
 
   if (Array.isArray(value)) {
-    return (actual ? 'different ' : '') + 'array of ' + value.length + ' items';
+    return `${actual ? 'different ' : ''}array (${JSON.stringify(value)})`;
   }
 
-  if (typeof value === 'string') {
-    return (
-      (actual ? 'different ' : '') + 'string of ' + value.length + ' chars'
-    );
-  }
-
-  if (typeof value === 'object') {
-    return (actual ? 'different ' : '') + 'object';
-  }
-
-  const digits = value.toString().replace(/[^0-9]/g, '').length;
-  return (actual ? 'different ' : '') + `${digits} digit number`;
+  return `${actual ? 'different ' : ''}${typeof value} (${JSON.stringify(value)})`;
 };
