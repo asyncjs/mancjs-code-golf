@@ -28,7 +28,9 @@ process.on('message', (entry: VerifyJob) => {
     const context: { play?: unknown; module: { exports: unknown } } = {
       ...challenge.context,
       module: {
-        exports: {},
+        exports: {
+          runBefore: challenge.runBefore,
+        },
       },
     };
 
@@ -38,6 +40,15 @@ process.on('message', (entry: VerifyJob) => {
       '\ntry{if (!module.exports.play) {module.exports.play = play}} catch(e) {}';
 
     runInNewContext(toRun, context);
+
+    if (
+      typeof context.module.exports === 'object' &&
+      !!context.module.exports &&
+      hasKey(context.module.exports, 'runBefore') &&
+      typeof context.module.exports.runBefore === 'function'
+    ) {
+      context.module.exports.runBefore();
+    }
 
     const play =
       typeof context.module.exports === 'function'
