@@ -26,6 +26,7 @@ process.on('message', (entry: VerifyJob) => {
 
     const script = readFileSync(entry.file, 'utf8');
     const context: { play?: unknown; module: { exports: unknown } } = {
+      ...challenge.context,
       module: {
         exports: {},
       },
