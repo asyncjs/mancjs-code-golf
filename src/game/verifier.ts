@@ -89,7 +89,7 @@ process.on('message', (entry: VerifyJob) => {
             ? err
             : err instanceof Error
               ? err.message
-              : 'Unknown error',
+              : `Unknown error ${err}`,
         valid: false,
       });
     }
