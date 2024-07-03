@@ -18,6 +18,7 @@ export interface Assertion<
 > {
   input: A;
   output: R | ((play: (...args: A) => R, input: A) => R);
+  sortOutput?: boolean;
 }
 
 export interface Challenge<
@@ -27,7 +28,7 @@ export interface Challenge<
   title: string;
   description: string;
   example: Example<A, R>;
-  assertions: readonly Assertion<A, R>[];
+  assertions: Assertion<A, R>[];
   assertRules?: (playString: string) => void;
   context?: Record<string, unknown>;
   timeLimitMinutes?: number;

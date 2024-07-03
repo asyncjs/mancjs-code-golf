@@ -81,6 +81,11 @@ process.on('message', (entry: VerifyJob) => {
               )
             : assertion.output;
 
+        if (assertion.sortOutput && Array.isArray(result) && Array.isArray(expected)) {
+          result.sort();
+          expected.sort()
+        }
+
         if (!lodash.isEqual(result, expected)) {
           throw new Error(
             `Expected ${formatTypeAndValue(

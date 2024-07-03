@@ -52,9 +52,9 @@ export const getChallenges = async (challengeDir: string) => {
         key,
         solution: fs.readFileSync(solutionPath, UTF8),
         ...challenge,
-        example: `(${challenge.example.input
+        example: `play(${challenge.example.input
           .map(formatValue)
-          .join(', ')}) => ${formatValue(challenge.example.output)}`,
+          .join(', ')}) ==== ${formatValue(challenge.example.output)}`,
       };
     })
   );
