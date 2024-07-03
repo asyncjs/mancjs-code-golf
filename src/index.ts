@@ -12,6 +12,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const PORT = 1122;
 
 if (!process.env['CG_ADMIN_PASSWORD']) {
+  // eslint-disable-next-line no-console
   console.error('Please set the CG_ADMIN_PASSWORD environment variable');
   process.exit(1);
 }
@@ -28,4 +29,5 @@ app.use(admin);
 
 app.listen(PORT);
 
+// eslint-disable-next-line no-console
 console.log(`Server running at http://localhost:${PORT}`);

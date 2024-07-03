@@ -1,3 +1,5 @@
+import { Primitive } from '../challenges/types.js';
+
 export const formatValue = (value: unknown): string => {
   if (typeof value === 'undefined') {
     return 'undefined';
@@ -32,33 +34,21 @@ export const formatValue = (value: unknown): string => {
   return `Unknown value: ${value}`;
 };
 
-export const formatTypeAndValue = (value: unknown, actual: any) => {
+export const formatTypeAndValue = (
+  value: Primitive | readonly unknown[] | Record<string, unknown>,
+  isResult: Primitive
+) => {
   if (value === null) {
     return 'null';
   }
 
-  if (typeof value === 'undefined') {
-    return 'undefined';
-  }
-
   if (typeof value === 'function') {
-    return 'function';
+    return `${isResult ? 'different ' : ''}function`;
   }
 
   if (Array.isArray(value)) {
-    return (actual ? 'different ' : '') + 'array of ' + value.length + ' items';
+    return `array ${formatValue(value)}`;
   }
 
-  if (typeof value === 'string') {
-    return (
-      (actual ? 'different ' : '') + 'string of ' + value.length + ' chars'
-    );
-  }
-
-  if (typeof value === 'object') {
-    return (actual ? 'different ' : '') + 'object';
-  }
-
-  const digits = value.toString().replace(/[^0-9]/g, '').length;
-  return (actual ? 'different ' : '') + `${digits} digit number`;
+  return `${typeof value} ${formatValue(value)}`;
 };

@@ -1,11 +1,5 @@
 import type { Challenge } from '../types.js';
 
-class ArrayNoSort extends Array {
-  public override sort() {
-    return ['allowed', 'no', 'sort'] as unknown as this;
-  }
-}
-
 const challenge: Challenge<[arr: readonly number[]], readonly number[]> = {
   title: 'Sort The Numbers',
   description:
@@ -20,9 +14,6 @@ const challenge: Challenge<[arr: readonly number[]], readonly number[]> = {
       output: [1, 1, 2, 10, 12, 16, 22, 23, 33, 34, 65, 150, 250, 300],
     },
   ],
-  context: {
-    Array: ArrayNoSort,
-  },
 };
 
 export default challenge;

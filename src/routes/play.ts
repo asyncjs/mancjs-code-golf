@@ -82,7 +82,7 @@ app.get('/solution/:key', (req, res) => {
 });
 
 app.post('/submit', (req, res) => {
-  const redirect = (result: Partial<game.Entry>, err: {}) => {
+  const redirect = (result: Partial<game.Entry>, err: string) => {
     const url = [
       '/?email=',
       result.email,

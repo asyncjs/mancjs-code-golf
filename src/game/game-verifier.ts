@@ -4,7 +4,6 @@ import * as url from 'url';
 
 import type { VerifyJob } from './verifier.js';
 import * as game from './game.js';
-import { challenges } from '../challenges/index.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -12,19 +11,14 @@ const MAX_RUNTIME = 10000;
 
 export const verify = (
   file: string,
-  callback: (res: { valid: false; err: string }) => void
+  callback: (res: { valid: boolean; err: string }) => void
 ) => {
   const currentGame = game.getOrError();
   const verifier = child_process.fork(path.resolve(__dirname, 'verifier.ts'));
-  const challenge = challenges.find((ch) => ch.key === currentGame.key);
 
-  if (!challenge) {
-    throw new Error('Challenge not found');
-  }
-
-  const job: VerifyJob<any, any> = {
+  const job: VerifyJob = {
     file,
-    challenge,
+    key: currentGame.key,
   };
 
   verifier.send(job);
@@ -38,7 +32,7 @@ export const verify = (
     });
   }, MAX_RUNTIME);
 
-  verifier.on('message', (result: any) => {
+  verifier.on('message', (result: { valid: boolean; err: string }) => {
     clearTimeout(timer);
     return callback({ valid: result.valid, err: result.err });
   });

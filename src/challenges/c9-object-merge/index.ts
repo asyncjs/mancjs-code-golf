@@ -1,8 +1,14 @@
-import type { Challenge } from '../types.js';
+import type { Challenge, Primitive } from '../types.js';
 
 const challenge: Challenge<
-  [input: [Record<string, any>, Record<string, any>, Record<string, any>]],
-  Record<string, any>
+  [
+    input: [
+      Record<string, Primitive>,
+      Record<string, Primitive>,
+      Record<string, Primitive>,
+    ],
+  ],
+  Record<string, Primitive>
 > = {
   title: 'Object Merge',
   description: `Write a function that takes an array containing three objects and merges them together, returning the single merged object. The three objects passed in (including any child objects) will not contain keys of the same name.`,
