@@ -31,4 +31,5 @@ export interface Challenge<
   assertRules?: (playString: string) => void;
   context?: Record<string, unknown>;
   timeLimitMinutes?: number;
+  runBefore?: () => void;
 }

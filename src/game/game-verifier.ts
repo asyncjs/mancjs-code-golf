@@ -4,8 +4,6 @@ import * as url from 'url';
 
 import type { VerifyJob } from './verifier.js';
 import * as game from './game.js';
-import { challenges } from '../challenges/index.js';
-import { Primitive } from '../challenges/types.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -17,15 +15,10 @@ export const verify = (
 ) => {
   const currentGame = game.getOrError();
   const verifier = child_process.fork(path.resolve(__dirname, 'verifier.ts'));
-  const challenge = challenges.find((ch) => ch.key === currentGame.key);
 
-  if (!challenge) {
-    throw new Error('Challenge not found');
-  }
-
-  const job: VerifyJob<readonly Primitive[], Primitive> = {
+  const job: VerifyJob = {
     file,
-    challenge,
+    key: currentGame.key,
   };
 
   verifier.send(job);
