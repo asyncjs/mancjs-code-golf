@@ -2,6 +2,9 @@ import fs from 'fs';
 import lodash from 'lodash';
 import express from 'express';
 import multiparty from 'multiparty';
+import Crypto from 'crypto';
+import { tmpdir } from 'os';
+import Path from 'path';
 
 import * as game from '../game/game.js';
 import { verify } from '../game/game-verifier.js';
@@ -81,6 +84,13 @@ app.get('/solution/:key', (req, res) => {
     .send(solution || 'No solution found');
 });
 
+function tmpFile(ext:string) {
+  return Path.join(
+    tmpdir(),
+    `archive.${Crypto.randomBytes(6).readUIntLE(0, 6).toString(36)}.${ext}`
+  );
+}
+
 app.post('/submit', (req, res) => {
   const redirect = (result: Partial<game.Entry>, err: string) => {
     const url = [
@@ -106,8 +116,12 @@ app.post('/submit', (req, res) => {
     const team = fields['team'][0];
     const key = fields['key'][0];
 
-    const file =
+    let file =
       files && files['file'] && files['file'][0] ? files['file'][0].path : null;
+    if (file == null) {
+      file = tmpFile('.js');
+      fs.writeFileSync(file, fields['code'][0]);
+    }
 
     const entry = {
       email,

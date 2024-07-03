@@ -4,7 +4,7 @@
   "description": "A code golf game server for JavaScript",
   "type": "module",
   "scripts": {
-    "start": "CG_ADMIN_PASSWORD=admin ts-node --esm --files --project tsconfig.json src/index.ts",
+    "start": "CG_ADMIN_PASSWORD=cheese ts-node --esm --files --project tsconfig.json src/index.ts",
     "tests": "jest --runInBand",
     "tests-watch": "jest --watch",
     "format": "prettier --write '**/*'",

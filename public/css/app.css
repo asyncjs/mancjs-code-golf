@@ -204,3 +204,47 @@ code {
   font-family: Courier, monospace;
   font-size: inherit;
 }
+
+.editor-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex-wrap: wrap;
+  background: rgb(255,255,255,0.9);
+}
+
+.editor {
+  flex-grow: 1;
+  min-width: 300px;
+}
+
+.right {
+  min-width: 200px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.console {
+  flex: 1;
+  overflow: scroll;
+  min-height: 0;
+}
+
+.test-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.test-container input {
+  flex-grow: 1;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}

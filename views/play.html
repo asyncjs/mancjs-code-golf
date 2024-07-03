@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
     <link href="css/app.css" rel="stylesheet" media="screen" />
-    <meta http-equiv="refresh" content="60">
+    <script src=" https://cdn.jsdelivr.net/npm/ace-builds@1.19.0/src-min-noconflict/ace.min.js "></script>
+    <link href=" https://cdn.jsdelivr.net/npm/ace-builds@1.19.0/css/ace.min.css " rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -75,8 +76,30 @@
                   onchange="javascript:this.form.submit();"
                 />
                 <input type="hidden" name="key" value="{{session.key}}" />
+                <input type="hidden" name="code" value="" />
+                <div id="editor-container" class="editor-container" style="display: none">
+                  <div id="editor" class="editor"></div>
+                  <div class="right">
+                    <div class="controls">
+                      <button type="submit" class="btn btn-lg btn-info" id="submit">Submit Entry</button>
+                      <div>
+                        Write your code in the editor. Hit "Submit Entry" to submit your entry to the leaderboard. Use the test field to try out your code and the results will appear below. If you reload the page we will remember the last code you entered.
+                      </div>
+                    </div>
+                    <div id="console" class="console"></div>
+                    <div class="test-container">
+                      <input id="test" value="{{ challenge.exampleTest }}{{ ^challenge.exampleTest }}play() {{/challenge.exampleTest}}"/>
+                      <button class="btn btn-lg btn-info" id="run-test">Run Test</button>
+                    </div>
+
+                  </div>
+                </div>
                 <div class="footer">
-                  <a href="#" class="btn btn-lg btn-info">Choose File</a>
+                  <div>
+                    You can upload a file from your computer with "Choose File" or you can edit online (or copy/paste) with "Web Editor"
+                  </div>
+                  <a href="#" class="btn btn-lg btn-info" id="choose">Choose File</a>
+                  <a href="#" class="btn btn-lg btn-info" id="open-editor">Web Editor</a>
                 </div>
               </form>
               {{/game.running}} {{^game.running}}
@@ -110,7 +133,7 @@
         offsetAddEntryHeight();
         $(window).on('resize', offsetAddEntryHeight);
 
-        $('.submit-form a').click(function(e) {
+        $('#choose').click(function(e) {
           e.preventDefault();
           $('.submit-form input[type="file"]').click();
         });
@@ -147,6 +170,59 @@
             clock.text([min, sec].join(':'));
           }, 1000);
         });
+
+
+
+        const editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/javascript");
+        editor.setValue(localStorage["code"] || "let play = () => {}");
+        function updateCode () {
+            localStorage["code"] = editor.getValue();
+            $('[name="code"]').val(editor.getValue());
+        }
+        updateCode();
+        editor.session.on('change', updateCode);
+
+        $('#open-editor').click(function(e) {
+          e.preventDefault();
+          if (!$('[name="email"]').val() || !$('[name="team"]').val()) {
+            alert("Please fill in a name and email first");
+            return;
+          }
+          $('[name="file"]').remove();
+          $('#editor-container').show();
+        });
+
+        function runTest() {
+          const oldConsoleLog = console.log;
+          console.log = function (...args) {
+            const output = args.join("");
+            const pre = document.createElement("pre");
+            pre.innerText = output;
+            $('#console').append(pre);
+            pre.scrollIntoView();
+          };
+          try {
+            console.log(eval(editor.getValue() + "\n;\n" + $('#test').val()));
+          } catch (e) {
+            console.log(e)
+          }
+          console.log = oldConsoleLog;
+        }
+
+        $('#test').keypress(function(e) {
+          if (e.which === 13) {
+            e.preventDefault();
+            runTest();
+          }
+        });
+
+        $('#run-test').click(function(e) {
+          e.preventDefault();
+          runTest();
+        });
+
       });
     </script>
   </body>
