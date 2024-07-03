@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
     <link href="css/app.css" rel="stylesheet" media="screen" />
+    <meta http-equiv="refresh" content="60">
   </head>
   <body>
     <div class="container">
@@ -12,10 +13,10 @@
         <div class="col-md-12">
           <div class="bs-callout bs-callout-info">
             <h4>{{challenge.title}}</h4>
-            <div class="challenge-info">{{challenge.description}}</div>
+            <div class="challenge-info"><pre>{{challenge.description}}</pre></div>
 
             <h4>Example</h4>
-            <div class="challenge-example">{{challenge.example}}</div>
+            <div class="challenge-example"><pre>{{challenge.example}}</pre></div>
           </div>
 
           <div class="clock">Time remaining: <span>{{clock}}</span></div>
