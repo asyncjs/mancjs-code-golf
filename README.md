@@ -31,7 +31,7 @@ Changing the title of the game on the admin page and starting the game again wil
 
 #### Runtime
 
-Node `v16.12.0` with no context and strict mode enforced.
+Node `v16.14.0` with no context and strict mode enforced.
 
 #### Submissions
 
@@ -49,7 +49,7 @@ Players can submit updated solutions as often as they like on the submission pag
 
 - Your solution must be a single synchronous function named `play` (don't worry about exporting it)
 - Your code will be run in strict mode – use node's `--use_strict` flag to test your script
-- All JavaScript language features available in Node.js `v16.12.0` are available, with game-specific exceptions
+- All JavaScript language features available in Node.js `v16.14.0` are available, with game-specific exceptions
 - Scripts are timed-out and fail after 5 seconds of execution time
-- Comments, line breaks and whitespace **do not count** towards your score
+- Comments, line breaks and whitespace **do not count** towards your score (we run your code through jsmin 1.0.1 before taking the length)
 - The aim is to solve the problem with the shortest possible code (fewest "strokes")
